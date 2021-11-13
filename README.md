@@ -1,0 +1,81 @@
+# ROS2 RealSense cameras get point cloud x,y,z coordinates
+These are packages for using Intel RealSense cameras with ROS2 and get the point cloud x,y,z coordinates.<br>
+For more detail about Intenl RealSense cameras with ROS2. Please see [realsense-ros](https://github.com/intelrealsense/realsense-ros/tree/ros2)
+
+## Enivorment/Equipment
+- Ubuntu 20.04
+- ROS2-foxy
+- Intel® RealSense™ DEPTH CAMERA D435i
+
+## Installation
+   (If your already install the enviroment and realsense2-camera. Please jump to the Fourth step.)
+   ### First
+   You should download ROS2. For me I'm using [ROS2 foxy](https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html) on [Ubuntu 20.04](https://releases.ubuntu.com/20.04/).<br>
+   ### Second
+   - #### Install realsense2_camera
+   ```
+   sudo apt-get install ros-foxy-realsense2-camera
+   ```
+   if you are using another ROS2 distro, just change "foxy" to which distro you are using.
+
+   ### Third
+   - #### Create a workspace
+   ```
+   mkdir -p ~/ros2_ws/src
+   cd ~/ros2_ws/src
+   ```
+   - #### Clone the ROS2 Intel® RealSense™ Intel from [IntelRealSense,realsense-ros](https://github.com/IntelRealSense/realsense-ros)
+   ```
+   git clone --depth 1 --branch `git ls-remote --tags https://github.com/IntelRealSense/realsense-ros.git | grep -Po "(?<=tags/)3.\d+\.\d+" | sort -V | tail -1` https://github.com/IntelRealSense/realsense-ros.git
+   ```
+
+   ### Fourth
+   - #### Clone the [ROS2_get_point_cloud](https://github.com/) to ```~/ros2_ws/src```
+   ```
+   git clone xxx
+   cd ~/ros2_ws
+   ```
+   ### fifth
+   - #### Install dependencies:
+   ```
+   sudo apt-get install python3-rosdep -y
+   sudo rosdep init
+   rosdep update
+   rosdep install -i --from-path src --rosdistro $ROS_DISTRO -y
+   sudo apt purge ros-$ROS_DISTRO-librealsense2 -y
+   sudo apt-get install ros-foxy-sensor-msgs-py
+   ```
+   ### sixth
+   - #### Build
+   ```
+   colcon build
+   ```
+   ### seventh
+   - #### Source
+   you should do it at every new terminal
+   ```
+   source install/local_setup.bash
+   ```
+   if it pop out the ros2 can't found error please enter the ```source /opt/ros/foxy/setup.bash```
+
+## Usage introduction
+- ### First terminal start the camera node in ROS2:
+```
+ros2 launch realsense2_camera rs_launch.py enable_pointcloud:=true device_type:=d435
+```
+- ### Second terminal start to get_point_cloud's x,y,z coordinates.
+```
+ros2 run ros2_get_point_cloud_xyz get_point_cloud_xyz
+```
+
+
+
+
+
+
+
+## Reference
+https://github.com/intelrealsense/realsense-ros/tree/ros2
+https://github.com/ros2/common_interfaces/blob/master/sensor_msgs_py/sensor_msgs_py/point_cloud2.py
+https://answers.ros.org/question/379029/how-to-get-xyz-coordinates-of-pointcloud-using-intel-real-sense-d415/
+https://docs.ros.org/en/foxy/Tutorials/Creating-Your-First-ROS2-Package.html
