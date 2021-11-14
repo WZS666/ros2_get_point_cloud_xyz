@@ -8,7 +8,7 @@ For more detail about Intenl RealSense cameras with ROS2. Please see [realsense-
 - Intel® RealSense™ DEPTH CAMERA D435i
 
 ## Installation
-   (If your already install the enviroment and realsense2-camera. Please jump to the [Fourth step](https://github.com/WZS666/ros2_get_point_cloud_xyz#fourth0).)
+   (If your already install the enviroment and realsense2-camera. Please jump to the [Fourth step](https://github.com/WZS666/ros2_get_point_cloud_xyz#fourth).)
    ### First0
    You should download ROS2. For me I'm using [ROS2 foxy](https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html) on [Ubuntu 20.04](https://releases.ubuntu.com/20.04/).<br>
    ### Second
